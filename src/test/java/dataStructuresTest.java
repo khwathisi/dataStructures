@@ -1,11 +1,16 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 public class dataStructuresTest {
-    dataStructures data = new dataStructures();
+    String Lines = ".........."+"...**....."+"....*....."+".........."+".........."+
+            "...**....."+"..**......"+".....*...."+"....*....."+"..........";
+    /*dataStructures data = new dataStructures();
+    data
 
     @Test
-    public void lessThan2Die()
+    public void rulesTest()
     {
 
-    }
+        Assert.assertEquals(data);
+    }*/
 }
