@@ -18,15 +18,16 @@ public class Main {
         {
             //Taking the user input
             System.out.println("Conway's Game of Life");
+            System.out.println("--You'll have to enter 10 lines--");
             int runTimes = 10;
             String Lines = "";
 
             for(int i = 0; i < runTimes; i++)
             {
                 int seq = i + 1;
-                System.out.println("Enter " + seq);
-                while(scan.hasNext(Pattern.compile("\\*|\\."))) {
-                    System.out.println("* For alive and . for dead");
+                System.out.println("Enter line " + seq);
+                while(scan.hasNext(Pattern.compile("#\\+"))) {
+                    System.out.println("# For alive and + for dead");
                     System.out.println("Try again for " + seq);
                     scan.next();
                 }

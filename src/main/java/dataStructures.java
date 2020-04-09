@@ -1,10 +1,7 @@
 import java.util.List;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class dataStructures {
-    public static Scanner scan = new Scanner(System.in);
-    public static StringBuilder stringBuilder = new StringBuilder();
     public static List<String> arrayLines = new ArrayList<String>();
     public static int vertical = 10;
     public static int horizontal = 10;
@@ -23,15 +20,6 @@ public class dataStructures {
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
         };
-
-         try
-         {
-
-         }catch(Exception e){
-             System.out.println("");
-         }
-
-
 
         //Setting up Custom Grid
         try
@@ -86,13 +74,16 @@ public class dataStructures {
                 try
                 {
                     //Alive
-                    if(arrayLines.get(y).equals("*"))
+                    if(arrayLines.get(y).equals("#"))
                     {
                         customGrid[verticalShift][horizontalShift] = 1;
                     }//Dead
-                    else if(arrayLines.get(y).equals("."))
+                    else if(arrayLines.get(y).equals("+"))
                     {
                         customGrid[verticalShift][horizontalShift] = 0;
+                    }else if(!arrayLines.get(y).equals("+") || !arrayLines.get(y).equals("#"))
+                    {
+                        customGrid[verticalShift][horizontalShift] = 2;
                     }
                 }catch(Exception e){
                     System.out.println("");
@@ -112,9 +103,15 @@ public class dataStructures {
                 for (int j = 0; j < horizontal; j++)
                 {
                     if (customGrid[i][j] == 0)
-                        System.out.print(".");
-                    else
-                        System.out.print("*");
+                    {
+                        System.out.print("+");
+                    }else if(customGrid[i][j] == 1)
+                    {
+                        System.out.print("#");
+                    }else
+                    {
+                        System.out.print("Z");
+                    }
                 }
                 System.out.println();
             }
@@ -124,8 +121,6 @@ public class dataStructures {
         }
 
         nextGen(customGrid, vertical, horizontal);
-
-
         return "";
     }
 
@@ -154,9 +149,18 @@ public class dataStructures {
                 for (int j = 0; j < horizontal; j++)
                 {
                     if (defaultGrid[i][j] == 0)
-                        System.out.print(".");
+                    {
+                        System.out.print("+");
+                    }
+                    else if(defaultGrid[i][j] == 1)
+                    {
+                        System.out.print("#");
+                    }
+                    //not sure what it is, must be a zombie
                     else
-                        System.out.print("*");
+                    {
+                        System.out.print("z");
+                    }
                 }
                 System.out.println();
             }
@@ -172,37 +176,36 @@ public class dataStructures {
     public static void nextGen(int[][] grid, int vertical, int horizontal)
     {
         int[][] next = new int[vertical][horizontal];
-
         for (int q = 1; q < vertical - 1; q++)
         {
             for (int x = 1; x < horizontal - 1; x++)
             {
-                int aliveNeighbours = 0;
-                //Looking for living neighbors
+                //Searching for any life around
+                int lifeAround = 0;
                 try
                 {
                     for (int z = -1; z <= 1; z++)
                     {
                         for (int y = -1; y <= 1; y++)
                         {
-                            aliveNeighbours += grid[q + z][x + y];
+                            lifeAround += grid[q + z][x + y];
                         }
                     }
-                    aliveNeighbours -= grid[q][x];
+                    lifeAround -= grid[q][x];
                 }catch(Exception e){
-                    System.out.println("Looking for living neighbors failed");
+                    System.out.println("Searching for any life around failed");
                 }
 
-                //Killing and Resurrecting
+                //Killing and Resurrecting, zombies are killed!!!
                 try
                 {
                     //Under Population
-                    if((grid[q][x] == 1) && (aliveNeighbours < 2)){next[q][x] = 0;}
+                    if((grid[q][x] == 1) && (lifeAround < 2)){next[q][x] = 0;}
                     //Overpopulation
-                    else if((grid[q][x] == 1) && (aliveNeighbours > 3)){next[q][x] = 0;}
+                    else if((grid[q][x] == 1) && (lifeAround > 3)){next[q][x] = 0;}
                     //Reproduction
-                    else if((grid[q][x] == 0) && (aliveNeighbours == 3)){next[q][x] = 1;}
-                    //Nothing changes
+                    else if((grid[q][x] == 0) && (lifeAround == 3)){next[q][x] = 1;}
+                    //Same old
                     else{next[q][x] = grid[q][x];}
                 }catch(Exception e){
                     System.out.println("Killing and\\\\or Resurrecting Failed");
@@ -221,11 +224,16 @@ public class dataStructures {
                 {
                     if(next[b][w] == 0)
                     {
-                        System.out.print(".");
+                        System.out.print("+");
                     }
+                    else if(next[b][w] == 1)
+                    {
+                        System.out.print("#");
+                    }
+                    //not sure what it is, must be a zombie
                     else
                     {
-                        System.out.print("*");
+                        System.out.print("z");
                     }
                 }
                 System.out.println();
@@ -233,6 +241,5 @@ public class dataStructures {
         }catch(Exception e){
             System.out.println("Displaying the Next Generation Failed");
         }
-
     }
 }
