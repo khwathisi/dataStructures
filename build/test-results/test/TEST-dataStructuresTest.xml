@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dataStructuresTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-11T04:31:30" hostname="recruit-ThinkCentre-M73" time="0.008">
+  <properties/>
+  <testcase name="rulesTest" classname="dataStructuresTest" time="0.008"/>
+  <system-out><![CDATA[Next Generation
+++++++++++
+++++++++++
+++++++++++
++++++++##+
++++++++##+
+++++++++++
+++++++++++
++###++++++
++###++++++
+++++++++++
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

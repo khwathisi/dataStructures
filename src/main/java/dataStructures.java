@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class dataStructures {
     public static List<String> arrayLines = new ArrayList<String>();
+    public static StringBuilder linesBuilder = new StringBuilder();
     public static int vertical = 10;
     public static int horizontal = 10;
 
@@ -108,9 +109,11 @@ public class dataStructures {
                     }else if(customGrid[i][j] == 1)
                     {
                         System.out.print("#");
-                    }else
+                    }
+                    //not sure what it is, must be a zombie
+                    else
                     {
-                        System.out.print("Z");
+                        System.out.print("z");
                     }
                 }
                 System.out.println();
@@ -121,6 +124,8 @@ public class dataStructures {
         }
 
         nextGen(customGrid, vertical, horizontal);
+
+        //return used for testing purposes only!
         return "";
     }
 
@@ -173,7 +178,7 @@ public class dataStructures {
     }
 
     //Killing and Resurrecting for the Next Generation
-    public static void nextGen(int[][] grid, int vertical, int horizontal)
+    public static String nextGen(int[][] grid, int vertical, int horizontal)
     {
         int[][] next = new int[vertical][horizontal];
         for (int q = 1; q < vertical - 1; q++)
@@ -225,15 +230,18 @@ public class dataStructures {
                     if(next[b][w] == 0)
                     {
                         System.out.print("+");
+                        linesBuilder.append("+");
                     }
                     else if(next[b][w] == 1)
                     {
                         System.out.print("#");
+                        linesBuilder.append("#");
                     }
                     //not sure what it is, must be a zombie
                     else
                     {
                         System.out.print("z");
+                        linesBuilder.append("z");
                     }
                 }
                 System.out.println();
@@ -241,5 +249,8 @@ public class dataStructures {
         }catch(Exception e){
             System.out.println("Displaying the Next Generation Failed");
         }
+
+        //return used for testing purposes only!
+        return linesBuilder.toString();
     }
 }
